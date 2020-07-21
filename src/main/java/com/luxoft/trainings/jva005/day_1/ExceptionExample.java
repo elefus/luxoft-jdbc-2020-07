@@ -1,4 +1,6 @@
-package com.luxoft.trainings.jva005;
+package com.luxoft.trainings.jva005.day_1;
+
+import com.luxoft.trainings.jva005.day_1.BrokenConnection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

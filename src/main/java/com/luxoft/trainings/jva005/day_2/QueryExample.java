@@ -1,4 +1,4 @@
-package com.luxoft.trainings.jva005;
+package com.luxoft.trainings.jva005.day_2;
 
 import java.io.IOException;
 import java.sql.*;
@@ -25,12 +25,6 @@ public class QueryExample {
 
             while (rs.next()) {
                 long userid = rs.getLong("USERID");
-
-                if (rs.getMetaData().getColumnType(1) == JDBCType.BIGINT.getVendorTypeNumber()) {
-
-                }
-
-
                 String name = rs.getString("NAME");
                 String address = rs.getString("ADDRESS");
                 String password = rs.getString("PASSWORD");

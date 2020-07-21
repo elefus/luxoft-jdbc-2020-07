@@ -1,4 +1,4 @@
-package com.luxoft.trainings.jva005;
+package com.luxoft.trainings.jva005.day_2;
 
 import java.io.BufferedReader;
 import java.io.IOException;

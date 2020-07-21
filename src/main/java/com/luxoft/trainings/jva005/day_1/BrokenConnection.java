@@ -1,4 +1,4 @@
-package com.luxoft.trainings.jva005;
+package com.luxoft.trainings.jva005.day_1;
 
 import java.sql.*;
 import java.util.Map;

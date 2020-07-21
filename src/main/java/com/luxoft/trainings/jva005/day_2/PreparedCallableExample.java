@@ -1,10 +1,8 @@
-package com.luxoft.trainings.jva005;
+package com.luxoft.trainings.jva005.day_2;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.sql.*;
 import java.util.Properties;
-import java.util.Scanner;
 
 public class PreparedCallableExample {
 
