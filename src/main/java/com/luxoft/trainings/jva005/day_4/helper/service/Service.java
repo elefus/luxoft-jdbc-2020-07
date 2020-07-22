@@ -1,0 +1,21 @@
+package com.luxoft.trainings.jva005.day_4.helper.service;
+
+import com.luxoft.trainings.jva005.day_3.helper.dao.UserDAO;
+import com.luxoft.trainings.jva005.domain.User;
+
+import java.util.Optional;
+
+public class Service {
+
+    public static void main(String[] args) {
+        UserDAO userDAO = new UserDAO();
+        Optional<User> user = userDAO.get(1L);
+        user.ifPresent(System.out::println);
+
+
+        User newUser = new User(-1, "NAME", "ADDRESS", "USERNAME", "PASSWORD", 0, 0);
+        userDAO.create(newUser);
+        System.out.println(userDAO.getAll());
+
+    }
+}
