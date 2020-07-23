@@ -1,12 +1,15 @@
 package com.luxoft.trainings.jva005.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @Builder
 @AllArgsConstructor
+// @NoArgsConstructor
+// @Getter
+// @Setter
+// @EqualsAndHashCode
+// @ToString
 public class User {
 
     private long userId;

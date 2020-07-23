@@ -14,12 +14,19 @@ public class ConnectionPool {
     private final BlockingQueue<Connection> freeConnections = new ArrayBlockingQueue<>(connectionLimit);
 
     public <T> T execute(ConnectionAction<T> action) throws SQLException {
-        return action.execute(freeConnections.poll());
+        Connection conn = freeConnections.poll();
+        try {
+            return action.execute(conn);
+        } finally {
+            if (freeConnections.offer(conn)) {
+
+            }
+        }
     }
 
     @FunctionalInterface
-    private static interface ConnectionAction<T> {
-        public T execute(Connection conn) throws SQLException;
+    public interface ConnectionAction<T> {
+        T execute(Connection conn) throws SQLException;
     }
 
     @RequiredArgsConstructor

@@ -3,9 +3,7 @@ package com.luxoft.trainings.jva005.day_4.pool.first;
 import lombok.experimental.Delegate;
 
 import java.io.Closeable;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Semaphore;

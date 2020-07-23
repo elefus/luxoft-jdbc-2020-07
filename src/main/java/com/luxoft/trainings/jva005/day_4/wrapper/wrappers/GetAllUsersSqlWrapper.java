@@ -25,4 +25,11 @@ public class GetAllUsersSqlWrapper extends SqlWrapper<User> {
                 rs.getInt("rating")
         );
     }
+
+    private static class ResultQueryClass {
+
+        private long id;
+        private String value;
+        private String value2;
+    }
 }

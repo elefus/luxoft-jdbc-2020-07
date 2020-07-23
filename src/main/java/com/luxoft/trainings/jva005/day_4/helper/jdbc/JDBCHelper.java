@@ -7,10 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class JDBCHelper {
 
-    public <T> List<T> query(String sql, Function<ResultSet, T> rowMapper, Object...args) {
+
+    public <T> List<T> query(String sql, Function<ResultSet, T> rowMapper, Object... args) {
+        return query(sql, rowMapper, __ -> true, args);
+    }
+    public <T> List<T> query(String sql, Function<ResultSet, T> rowMapper, Predicate<ResultSet> filter, Object... args) {
         try (Connection conn = Database.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareCall(sql)) {
 
@@ -21,7 +26,11 @@ public class JDBCHelper {
             try (ResultSet rs = stmt.executeQuery()) {
                 ArrayList<T> result = new ArrayList<>();
                 while (rs.next()) {
-                    result.add(rowMapper.apply(rs));
+                    if (filter.test(rs)) {
+                        T value = rowMapper.apply(rs);
+                        result.add(value);
+//                    rowMapper.andThen(result::add).apply(rs);
+                    }
                 }
                 return result;
             }
@@ -31,7 +40,7 @@ public class JDBCHelper {
         }
     }
 
-    public <T> Optional<T> queryUnique(String sql, Function<ResultSet, T> rowMapper, Object...args) {
+    public <T> Optional<T> queryUnique(String sql, Function<ResultSet, T> rowMapper, Object... args) {
         try (Connection conn = Database.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareCall(sql)) {
 
@@ -52,7 +61,7 @@ public class JDBCHelper {
         }
     }
 
-    public int executeUpdate(String sql, Object...args) {
+    public int executeUpdate(String sql, Object... args) {
         try (Connection conn = Database.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareCall(sql)) {
 
@@ -66,7 +75,6 @@ public class JDBCHelper {
             throw new AssertionError("Unreachable code");
         }
     }
-
 
 
     private void addArgument(PreparedStatement ps, int index, Object arg) throws SQLException {
@@ -89,13 +97,11 @@ public class JDBCHelper {
     }
 
     @SuppressWarnings("unchecked")
-    private static <T extends Throwable> void throwException(Throwable exception, Object dummy) throws T
-    {
+    private static <T extends Throwable> void throwException(Throwable exception, Object dummy) throws T {
         throw (T) exception;
     }
 
-    public static void throwException(Throwable exception)
-    {
+    public static void throwException(Throwable exception) {
         JDBCHelper.<RuntimeException>throwException(exception, null);
     }
 }
