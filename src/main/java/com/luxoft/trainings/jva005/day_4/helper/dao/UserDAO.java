@@ -1,6 +1,6 @@
 package com.luxoft.trainings.jva005.day_4.helper.dao;
 
-import com.luxoft.trainings.jva005.day_3.helper.jdbc.JDBCHelper;
+import com.luxoft.trainings.jva005.day_4.helper.jdbc.JDBCHelper;
 import com.luxoft.trainings.jva005.domain.User;
 
 import java.sql.SQLException;

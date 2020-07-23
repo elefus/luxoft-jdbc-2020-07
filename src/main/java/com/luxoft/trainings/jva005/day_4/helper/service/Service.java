@@ -1,6 +1,6 @@
 package com.luxoft.trainings.jva005.day_4.helper.service;
 
-import com.luxoft.trainings.jva005.day_3.helper.dao.UserDAO;
+import com.luxoft.trainings.jva005.day_4.helper.dao.UserDAO;
 import com.luxoft.trainings.jva005.domain.User;
 
 import java.util.Optional;
